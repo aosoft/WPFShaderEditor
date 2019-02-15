@@ -36,7 +36,7 @@ float4 main(float2 uv : TEXCOORD) : COLOR
 				.Delay(TimeSpan.FromMilliseconds(500))
 				.Select(value =>
 				{
-					if (value != null)
+					if (!string.IsNullOrEmpty(value))
 					{
 						try
 						{
@@ -44,7 +44,7 @@ float4 main(float2 uv : TEXCOORD) : COLOR
 						}
 						catch (Exception e)
 						{
-							return new CompilationResult(null, SharpDX.Result.Fail, e.Message);
+							return new CompilationResult(null, SharpDX.Result.Fail, e.StackTrace);
 						}
 					}
 					return new CompilationResult(null, SharpDX.Result.Ok, string.Empty);

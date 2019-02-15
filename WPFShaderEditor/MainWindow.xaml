@@ -13,18 +13,6 @@
         <l:CustomShaderEffect Bytecode="{Binding Path=Bytecode.Value}" />
       </Grid.Effect>
     </Grid>
-    <TextBlock
-      Background="Transparent"
-      FontSize="16"
-      Foreground="Red"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      TextWrapping="Wrap"
-      Text="{Binding Path=ErrorMessage.Value}">
-      <TextBlock.Effect>
-        <DropShadowEffect Color="Black" />
-      </TextBlock.Effect>
-    </TextBlock>
     <TextBox
       Background="Transparent"
       FontSize="16"
@@ -38,5 +26,17 @@
         <DropShadowEffect Color="Black" />
       </TextBox.Effect>
     </TextBox>
+    <TextBlock
+      Background="Transparent"
+      FontSize="16"
+      Foreground="Red"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Bottom"
+      TextWrapping="Wrap"
+      Text="{Binding Path=ErrorMessage.Value}">
+      <TextBlock.Effect>
+        <DropShadowEffect Color="Black" />
+      </TextBlock.Effect>
+    </TextBlock>
   </Grid>
 </Window>
