@@ -84,7 +84,7 @@ namespace WPFShaderEditor
 			{
 				fw.Dispose();
 			};
-#endif
+#endif 
 		}
 	}
 }

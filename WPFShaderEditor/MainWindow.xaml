@@ -8,10 +8,32 @@
   mc:Ignorable="d"
   Title="MainWindow" Height="450" Width="800">
   <Grid>
-    <Grid Background="Black">
+    <Grid x:Name="baseGrid" Background="Black">
       <Grid.Effect>
-        <l:CustomShaderEffect Bytecode="{Binding Path=Bytecode.Value}" />
+        <l:CustomShaderEffect
+          x:Name="shader"
+          Bytecode="{Binding Path=Bytecode.Value}"
+          Width="{Binding ElementName=baseGrid, Path=ActualWidth}"
+          Height="{Binding ElementName=baseGrid, Path=ActualHeight}"
+          />
       </Grid.Effect>
+      <Grid.Triggers>
+        <EventTrigger RoutedEvent="Grid.Loaded">
+          <BeginStoryboard>
+            <Storyboard>
+              <DoubleAnimation
+                Storyboard.TargetName="shader"
+                Storyboard.TargetProperty="Time"
+                From="0"
+                To="10"
+                RepeatBehavior="Forever"
+                AutoReverse="false"
+                Duration="0:0:10"
+                />
+            </Storyboard>
+          </BeginStoryboard>
+        </EventTrigger>
+      </Grid.Triggers>
     </Grid>
     <TextBox
       Background="Transparent"

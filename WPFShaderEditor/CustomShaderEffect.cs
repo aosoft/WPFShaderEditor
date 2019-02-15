@@ -16,6 +16,50 @@ namespace WPFShaderEditor
 			PixelShader = new PixelShader();
 		}
 
+
+
+		public double Width
+		{
+			get { return (double)GetValue(WidthProperty); }
+			set { SetValue(WidthProperty, value); }
+		}
+
+		// Using a DependencyProperty as the backing store for Width.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty WidthProperty =
+			DependencyProperty.Register("Width",
+				typeof(double),
+				typeof(CustomShaderEffect),
+				new PropertyMetadata(0.0, PixelShaderConstantCallback(0)));
+
+		public double Height
+		{
+			get { return (double)GetValue(HeightProperty); }
+			set { SetValue(HeightProperty, value); }
+		}
+
+		// Using a DependencyProperty as the backing store for Height.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty HeightProperty =
+			DependencyProperty.Register(
+				"Height",
+				typeof(double),
+				typeof(CustomShaderEffect),
+				new PropertyMetadata(0.0, PixelShaderConstantCallback(1)));
+
+
+		public double Time
+		{
+			get { return (double)GetValue(TimeProperty); }
+			set { SetValue(TimeProperty, value); }
+		}
+
+		// Using a DependencyProperty as the backing store for Time.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty TimeProperty =
+			DependencyProperty.Register(
+				"Time",
+				typeof(double),
+				typeof(CustomShaderEffect),
+				new PropertyMetadata(0.0, PixelShaderConstantCallback(2)));
+
 		public byte[] Bytecode
 		{
 			get { return (byte[])GetValue(BytecodeProperty); }
@@ -51,12 +95,5 @@ namespace WPFShaderEditor
 				}
 			}
 		}
-
-		/*
-		private static Bytecode Compile(string code)
-		{
-			return Bytecode.Compile(code, "main", "ps3_0");
-		}
-		*/
 	}
 }
