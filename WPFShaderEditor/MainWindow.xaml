@@ -8,57 +8,76 @@
   mc:Ignorable="d"
   Title="MainWindow" Height="450" Width="800">
   <Grid>
-    <Grid x:Name="baseGrid" Background="Black">
-      <Grid.Effect>
-        <l:CustomShaderEffect
-          x:Name="shader"
-          Bytecode="{Binding Path=Bytecode.Value}"
-          Width="{Binding ElementName=baseGrid, Path=ActualWidth}"
-          Height="{Binding ElementName=baseGrid, Path=ActualHeight}"
-          />
-      </Grid.Effect>
-      <Grid.Triggers>
-        <EventTrigger RoutedEvent="Grid.Loaded">
-          <BeginStoryboard>
-            <Storyboard>
-              <DoubleAnimation
-                Storyboard.TargetName="shader"
-                Storyboard.TargetProperty="Time"
-                From="0"
-                To="10"
-                RepeatBehavior="Forever"
-                AutoReverse="false"
-                Duration="0:0:10"
-                />
-            </Storyboard>
-          </BeginStoryboard>
-        </EventTrigger>
-      </Grid.Triggers>
+    <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition Height="24" />
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+      <Grid x:Name="baseGrid" Background="Black">
+        <Grid.Effect>
+          <l:CustomShaderEffect
+            x:Name="shader"
+            Bytecode="{Binding Path=Bytecode.Value}"
+            Width="{Binding ElementName=baseGrid, Path=ActualWidth}"
+            Height="{Binding ElementName=baseGrid, Path=ActualHeight}"
+            />
+        </Grid.Effect>
+        <Grid.Triggers>
+          <EventTrigger RoutedEvent="Grid.Loaded">
+            <BeginStoryboard>
+              <Storyboard>
+                <DoubleAnimation
+                  Storyboard.TargetName="shader"
+                  Storyboard.TargetProperty="Time"
+                  From="0"
+                  To="3600"
+                  RepeatBehavior="Forever"
+                  AutoReverse="false"
+                  Duration="1:0:0"
+                  />
+              </Storyboard>
+            </BeginStoryboard>
+          </EventTrigger>
+        </Grid.Triggers>
+        <MediaElement x:Name="mediaElement" MediaEnded="MediaElement_OnMediaEnded" LoadedBehavior="Manual" Visibility="Collapsed" />
+      </Grid>
+      <TextBox
+        Background="Transparent"
+        FontSize="16"
+        Foreground="White"
+        CaretBrush="White"
+        AcceptsReturn="True"
+        TextWrapping="Wrap"
+        VerticalScrollBarVisibility="Auto"
+        Text="{Binding Path=Source.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <TextBox.Effect>
+          <DropShadowEffect Color="Black" />
+        </TextBox.Effect>
+      </TextBox>
+      <TextBlock
+        Background="Transparent"
+        FontSize="16"
+        Foreground="Red"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Bottom"
+        TextWrapping="Wrap"
+        Text="{Binding Path=ErrorMessage.Value}">
+        <TextBlock.Effect>
+          <DropShadowEffect Color="Black" />
+        </TextBlock.Effect>
+      </TextBlock>
     </Grid>
-    <TextBox
-      Background="Transparent"
-      FontSize="16"
-      Foreground="White"
-      CaretBrush="White"
-      AcceptsReturn="True"
-      TextWrapping="Wrap"
-      VerticalScrollBarVisibility="Auto"
-      Text="{Binding Path=Source.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-      <TextBox.Effect>
-        <DropShadowEffect Color="Black" />
-      </TextBox.Effect>
-    </TextBox>
-    <TextBlock
-      Background="Transparent"
-      FontSize="16"
-      Foreground="Red"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      TextWrapping="Wrap"
-      Text="{Binding Path=ErrorMessage.Value}">
-      <TextBlock.Effect>
-        <DropShadowEffect Color="Black" />
-      </TextBlock.Effect>
-    </TextBlock>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="64" />
+        <ColumnDefinition Width="64" />
+      </Grid.ColumnDefinitions>
+      <TextBox Grid.Column="0" x:Name="txtboxMediaFileName" />
+      <Button Grid.Column="1" Content="..." Click="ButtonOpenFile_OnClick" />
+      <Button Grid.Column="2" Content="Play" Click="ButtonPlay_OnClick" />
+      <Button Grid.Column="3" Content="Reset" Click="ButtonReset_OnClick" />
+    </Grid>
   </Grid>
 </Window>

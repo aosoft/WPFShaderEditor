@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Effects;
 
 namespace WPFShaderEditor
@@ -14,8 +15,17 @@ namespace WPFShaderEditor
 		public CustomShaderEffect()
 		{
 			PixelShader = new PixelShader();
+			UpdateShaderValue(InputProperty);
 		}
 
+		public Brush Input
+		{
+			get { return (Brush)GetValue(InputProperty); }
+			set { SetValue(InputProperty, value); }
+		}
+
+		public static readonly DependencyProperty InputProperty =
+			ShaderEffect.RegisterPixelShaderSamplerProperty("Input", typeof(CustomShaderEffect), 0);
 
 
 		public double Width

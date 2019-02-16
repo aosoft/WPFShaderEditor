@@ -23,13 +23,13 @@ namespace WPFShaderEditor
 		public ShaderManager()
 		{
 			Source = new ReactivePropertySlim<string>(@"
-sampler2D implicitInput : register(s0);
+sampler2D input : register(s0);
 float width : register(c0);
 float height : register(c1);
 float time : register(c2);
 float4 main(float2 uv : TEXCOORD) : COLOR
 {
-    return float4(uv.x * frac(time), uv.y, 0.0, 1.0);
+    return tex2D(input, float2(uv.x + sin((uv.y + time * 0.5) * 3.14159 * 10) * 0.1, uv.y));
 }
 ");
 			Bytecode = _bytecode.ToReadOnlyReactivePropertySlim();

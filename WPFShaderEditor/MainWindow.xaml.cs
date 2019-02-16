@@ -1,4 +1,4 @@
-﻿#define FILE_WATCHER
+﻿//#define FILE_WATCHER
 
 using System;
 using System.Collections.Generic;
@@ -86,5 +86,43 @@ namespace WPFShaderEditor
 			};
 #endif 
 		}
+
+		private void MediaElement_OnMediaEnded(object sender, RoutedEventArgs e)
+		{
+			mediaElement.Position = TimeSpan.Zero;
+			mediaElement.Play();
+		}
+
+		private void ButtonOpenFile_OnClick(object sender, EventArgs e)
+		{
+			var d = new Microsoft.Win32.OpenFileDialog();
+			d.FileName = txtboxMediaFileName.Text;
+			if (d.ShowDialog().GetValueOrDefault())
+			{
+				txtboxMediaFileName.Text = d.FileName;
+			}
+		}
+
+		private void ButtonPlay_OnClick(object sender, EventArgs e)
+		{
+			try
+			{
+				mediaElement.Source = new Uri(txtboxMediaFileName.Text);
+				mediaElement.Play();
+				mediaElement.Visibility = Visibility.Visible;
+			}
+			catch
+			{
+				mediaElement.Pause();
+				mediaElement.Visibility = Visibility.Collapsed;
+			}
+		}
+
+		private void ButtonReset_OnClick(object sender, EventArgs e)
+		{
+			mediaElement.Pause();
+			mediaElement.Visibility = Visibility.Collapsed;
+		}
 	}
+
 }
